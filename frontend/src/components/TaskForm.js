@@ -75,7 +75,7 @@ const TaskForm = () => {
         category: suggestion.category || '',
       });
     }
-  }, [isEditing, id]);
+  }, [isEditing, id, location.state?.suggestion]);
 
   const handleChange = (e) => {
     setFormData({
