@@ -30,7 +30,6 @@ import {
   Edit as EditIcon,
   Dashboard as DashboardIcon,
   Task as TaskIcon,
-  TrendingUp as TrendingIcon,
   Lightbulb as SuggestionIcon,
 } from '@mui/icons-material';
 import { useAuth } from '../contexts/AuthContext';

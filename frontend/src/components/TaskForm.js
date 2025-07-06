@@ -47,6 +47,22 @@ const TaskForm = () => {
   const [aiSuggestions, setAiSuggestions] = useState({});
 
   useEffect(() => {
+    const fetchTask = async () => {
+      try {
+        setLoading(true);
+        const task = await taskService.getTask(id);
+        setFormData({
+          title: task.title,
+          description: task.description || '',
+          priority: task.priority || '',
+          category: task.category || '',
+        });
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
     if (isEditing) {
       fetchTask();
     } else if (location.state?.suggestion) {
@@ -59,24 +75,7 @@ const TaskForm = () => {
         category: suggestion.category || '',
       });
     }
-  }, [id, location.state]);
-
-  const fetchTask = async () => {
-    try {
-      setLoading(true);
-      const task = await taskService.getTask(id);
-      setFormData({
-        title: task.title,
-        description: task.description || '',
-        priority: task.priority || '',
-        category: task.category || '',
-      });
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
+  }, [isEditing, location.state]);
 
   const handleChange = (e) => {
     setFormData({

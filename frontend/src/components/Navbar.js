@@ -15,7 +15,6 @@ import {
 import {
   TaskAlt as TaskIcon,
   Add as AddIcon,
-  AccountCircle,
   Logout,
   Person,
 } from '@mui/icons-material';
