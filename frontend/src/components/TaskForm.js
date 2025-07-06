@@ -46,8 +46,6 @@ const TaskForm = () => {
   const [aiProcessing, setAiProcessing] = useState(false);
   const [aiSuggestions, setAiSuggestions] = useState({});
 
-  const id = location.state?.id;
-
   useEffect(() => {
     const fetchTask = async () => {
       try {
