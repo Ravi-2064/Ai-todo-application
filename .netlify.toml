@@ -1,0 +1,8 @@
+[build]
+  base    = "frontend"
+  publish = "build"
+  command = "npm run build"
+
+[build.environment]
+  # Uncomment and set this if you want to use an environment variable for your backend API
+  # REACT_APP_API_URL = "https://ai-todo-application.onrender.com" 
