@@ -24,12 +24,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-8whv#7nzomz$8wh7^yzzb@e0k*6e^%8c=-h3q2l9e-t2@ev=k!')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', 'True').lower() == 'true'
+DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
 
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
     'healthcheck.railway.app',
+    'ai-todo-application.onrender.com',
     # Add your production domains here
     os.environ.get('ALLOWED_HOST', ''),
 ]
