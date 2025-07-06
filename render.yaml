@@ -1,0 +1,42 @@
+services:
+  - type: web
+    name: ai-todo-backend
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn backend.wsgi:application
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.0
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"
+      - key: ALLOWED_HOST
+        value: ai-todo-backend.onrender.com
+      - key: FRONTEND_URL
+        value: https://ai-todo-frontend.vercel.app
+      - key: DB_NAME
+        fromDatabase:
+          name: ai-todo-db
+          property: database
+      - key: DB_USER
+        fromDatabase:
+          name: ai-todo-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: ai-todo-db
+          property: password
+      - key: DB_HOST
+        fromDatabase:
+          name: ai-todo-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: ai-todo-db
+          property: port
+
+databases:
+  - name: ai-todo-db
+    databaseName: ai_todo_db
+    user: ai_todo_user 

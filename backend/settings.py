@@ -145,11 +145,16 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:3000",
     "http://localhost:3001",
     "http://127.0.0.1:3001",
-    # Add your production frontend URL here
-    os.environ.get('FRONTEND_URL', ''),
 ]
 
+# Add production frontend URL if it exists
+frontend_url = os.environ.get('FRONTEND_URL', '')
+if frontend_url:
+    CORS_ALLOWED_ORIGINS.append(frontend_url)
+
 CORS_ALLOW_CREDENTIALS = True
+# Remove this line for production - it's a security risk
+# CORS_ALLOW_ALL_ORIGINS = True  # For development only
 
 # REST Framework settings
 REST_FRAMEWORK = {
