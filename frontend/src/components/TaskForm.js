@@ -46,6 +46,8 @@ const TaskForm = () => {
   const [aiProcessing, setAiProcessing] = useState(false);
   const [aiSuggestions, setAiSuggestions] = useState({});
 
+  const id = location.state?.id;
+
   useEffect(() => {
     const fetchTask = async () => {
       try {
@@ -75,7 +77,7 @@ const TaskForm = () => {
         category: suggestion.category || '',
       });
     }
-  }, [isEditing, location.state]);
+  }, [isEditing, id]);
 
   const handleChange = (e) => {
     setFormData({
