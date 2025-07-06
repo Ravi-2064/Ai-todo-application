@@ -19,6 +19,19 @@ api.interceptors.request.use(async (config) => {
   return config;
 });
 
+// Add response interceptor to handle authentication errors
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      // Token is invalid, clear it
+      localStorage.removeItem('authToken');
+      window.location.href = '/login';
+    }
+    return Promise.reject(error);
+  }
+);
+
 export const authService = {
   async signup(username, email, password, confirmPassword) {
     try {

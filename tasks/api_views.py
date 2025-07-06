@@ -5,9 +5,6 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
-from django.views.decorators.csrf import csrf_exempt
-from django.utils.decorators import method_decorator
-from django.middleware.csrf import get_token
 from django.http import JsonResponse
 from .models import Task
 from .serializers import TaskSerializer, UserSerializer
@@ -61,7 +58,6 @@ class TaskViewSet(viewsets.ModelViewSet):
 class AuthViewSet(viewsets.ViewSet):
     permission_classes = [AllowAny]
     
-    @method_decorator(csrf_exempt)
     @action(detail=False, methods=['post'])
     def signup(self, request):
         username = request.data.get('username')
@@ -99,7 +95,6 @@ class AuthViewSet(viewsets.ViewSet):
                 email=email,
                 password=password
             )
-            login(request, user)
             token, created = Token.objects.get_or_create(user=user)
             return Response({
                 'token': token.key,
@@ -112,7 +107,6 @@ class AuthViewSet(viewsets.ViewSet):
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
     
-    @method_decorator(csrf_exempt)
     @action(detail=False, methods=['post'])
     def login(self, request):
         username = request.data.get('username')
@@ -126,7 +120,6 @@ class AuthViewSet(viewsets.ViewSet):
         
         user = authenticate(username=username, password=password)
         if user:
-            login(request, user)
             token, created = Token.objects.get_or_create(user=user)
             return Response({
                 'token': token.key,
@@ -140,7 +133,12 @@ class AuthViewSet(viewsets.ViewSet):
     
     @action(detail=False, methods=['post'])
     def logout(self, request):
-        logout(request)
+        if request.user.is_authenticated:
+            # Delete the token
+            try:
+                request.user.auth_token.delete()
+            except:
+                pass
         return Response({'message': 'Logged out successfully'})
     
     @action(detail=False, methods=['get'])
@@ -155,4 +153,4 @@ class AuthViewSet(viewsets.ViewSet):
     
     @action(detail=False, methods=['get'])
     def csrf(self, request):
-        return JsonResponse({'csrfToken': get_token(request)}) 
+        return JsonResponse({'csrfToken': 'not-needed-for-token-auth'}) 
