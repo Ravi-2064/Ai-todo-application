@@ -81,7 +81,7 @@ This guide will help you deploy your AI To-Do application to Vercel (frontend) a
 4. **Configure Environment Variables**
    - In Vercel project settings, add:
      ```
-     REACT_APP_API_URL=https://your-railway-app.railway.app
+     REACT_APP_API_URL=https://ai-todo-backend.onrender.com
      ```
 
 ### 4. Update CORS Settings
@@ -174,7 +174,7 @@ CORS_ALLOWED_ORIGINS=https://your-frontend-domain.com
 
 #### Frontend (Vercel/Netlify)
 ```
-REACT_APP_API_URL=https://your-backend-domain.com
+REACT_APP_API_URL=https://ai-todo-backend.onrender.com
 ```
 
 ## 📊 Monitoring
