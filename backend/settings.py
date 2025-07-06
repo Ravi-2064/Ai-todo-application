@@ -25,7 +25,13 @@ SECRET_KEY = 'django-insecure-8whv#7nzomz$8wh7^yzzb@e0k*6e^%8c=-h3q2l9e-t2@ev=k!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    'healthcheck.railway.app',
+    # Add your Railway app domain below (replace with your actual domain)
+    'your-app-name.up.railway.app',
+]
 
 
 # Application definition
