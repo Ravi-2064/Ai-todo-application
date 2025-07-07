@@ -27,31 +27,43 @@ const Login = () => {
     username: '',
     password: '',
   });
+  const { username, password } = formData;
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [formErrors, setFormErrors] = useState({ username: '', password: '' });
+
+  const validate = () => {
+    let errors = { username: '', password: '' };
+    if (!username.trim()) errors.username = 'Username is required';
+    if (!password) errors.password = 'Password is required';
+    else if (password.length < 6) errors.password = 'Password must be at least 6 characters';
+    setFormErrors(errors);
+    return !errors.username && !errors.password;
+  };
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
+    setFormErrors({ ...formErrors, [e.target.name]: '' });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
     setError('');
-
+    if (!validate()) return;
+    setLoading(true);
     try {
-      const result = await login(formData.username, formData.password);
+      const result = await login(username, password);
       if (result.success) {
         navigate('/');
       } else {
-        setError(result.error);
+        setError(result.error || 'Login failed. Please try again.');
       }
     } catch (err) {
-      setError(err.message);
+      setError(err.message || 'An unexpected error occurred.');
     } finally {
       setLoading(false);
     }
@@ -116,9 +128,11 @@ const Login = () => {
               name="username"
               autoComplete="username"
               autoFocus
-              value={formData.username}
+              value={username}
               onChange={handleChange}
               disabled={loading}
+              error={!!formErrors.username}
+              helperText={formErrors.username}
             />
             
             <TextField
@@ -130,16 +144,19 @@ const Login = () => {
               type={showPassword ? 'text' : 'password'}
               id="password"
               autoComplete="current-password"
-              value={formData.password}
+              value={password}
               onChange={handleChange}
               disabled={loading}
+              error={!!formErrors.password}
+              helperText={formErrors.password}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
                     <IconButton
-                      aria-label="toggle password visibility"
+                      aria-label={showPassword ? 'Hide password' : 'Show password'}
                       onClick={handleTogglePassword}
                       edge="end"
+                      tabIndex={-1}
                     >
                       {showPassword ? <VisibilityOff /> : <Visibility />}
                     </IconButton>
