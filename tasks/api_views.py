@@ -102,6 +102,7 @@ class AuthViewSet(viewsets.ViewSet):
                 'message': 'User created successfully'
             }, status=status.HTTP_201_CREATED)
         except Exception as e:
+            print("Signup error:", e)
             return Response(
                 {'message': 'Error creating user'}, 
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
