@@ -121,20 +121,13 @@ The application is configured to allow requests from:
 
 ## 🚀 Deployment
 
-### Option 1: Vercel + Railway (Recommended)
-1. **Frontend**: Deploy to Vercel
-2. **Backend**: Deploy to Railway
-3. **Database**: Use Railway PostgreSQL
 
 ### Option 2: Netlify + Render
 1. **Frontend**: Deploy to Netlify
 2. **Backend**: Deploy to Render
 3. **Database**: Use Render PostgreSQL
 
-### Option 3: AWS
-1. **Frontend**: S3 + CloudFront
-2. **Backend**: EC2 or Elastic Beanstalk
-3. **Database**: RDS PostgreSQL
+
 
 ## 📝 API Endpoints
 
@@ -177,4 +170,4 @@ If you have any questions or need help, please open an issue on GitHub.
 
 ---
 
-**Made with ❤️ by [Your Name]** 
+**Made with ❤️ by ravi verma** 
