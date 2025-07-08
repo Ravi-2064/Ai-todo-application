@@ -20,6 +20,9 @@ ALLOWED_HOSTS = [
 # CORS settings for production
 CORS_ALLOWED_ORIGINS = [
     os.environ.get('FRONTEND_URL', ''),
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "https://ai-todo-application-frontend.vercel.app",  # Example Vercel URL, update if needed
 ]
 
 CORS_ALLOW_CREDENTIALS = True
