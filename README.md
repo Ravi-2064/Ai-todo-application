@@ -122,8 +122,8 @@ The application is configured to allow requests from:
 ## 🚀 Deployment
 
 
-### Option 2: Netlify + Render
-1. **Frontend**: Deploy to Netlify
+### Option 2: Vercel+ Render
+1. **Frontend**: Deploy to vercel
 2. **Backend**: Deploy to Render
 3. **Database**: Use Render PostgreSQL
 
